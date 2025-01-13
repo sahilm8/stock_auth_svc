@@ -1,7 +1,6 @@
 package com.sahil.globe.auth.model;
 
 import java.util.Date;
-import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
