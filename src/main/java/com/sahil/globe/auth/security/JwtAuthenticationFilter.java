@@ -40,25 +40,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         final String jwt = authHeader.substring(7);
         final String userEmail = jwtService.extractClaim(jwt, claims -> claims.getSubject());
-        
+
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userRepository
                     .findByEmail(userEmail)
                     .map(UserPrincipal::from)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found."));
-                    
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found: " + userEmail));
+
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                    userDetails,
-                    null,
-                    userDetails.getAuthorities()
-                );
-                
+                        userDetails,
+                        null,
+                        userDetails.getAuthorities());
+
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
-        
+
         filterChain.doFilter(request, response);
     }
 }

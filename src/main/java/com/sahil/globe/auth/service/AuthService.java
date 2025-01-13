@@ -25,7 +25,6 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
 
-
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new UserAlreadyExistsException("Email already registered: " + request.getEmail());
@@ -40,7 +39,7 @@ public class AuthService {
 
         User savedUser = userRepository.save(user);
         UserPrincipal principal = UserPrincipal.from(savedUser);
-        
+
         return AuthResponse.builder()
                 .accessToken(jwtService.generateToken(principal))
                 .refreshToken(jwtService.generateRefreshToken(principal))
@@ -52,14 +51,14 @@ public class AuthService {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         } catch (BadCredentialsException e) {
-            throw new BadCredentialsException("Invalid email or password.");
+            throw new BadCredentialsException("Invalid email or password");
         }
-        
+
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("User not found: " + request.getEmail()));
-        
+
         UserPrincipal principal = UserPrincipal.from(user);
-        
+
         return AuthResponse.builder()
                 .accessToken(jwtService.generateToken(principal))
                 .refreshToken(jwtService.generateRefreshToken(principal))
