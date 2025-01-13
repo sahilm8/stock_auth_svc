@@ -13,6 +13,12 @@ spring:
       hibernate:
         format_sql: true
 
+  jwt:
+    secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    expiration: 604800000 # 7 days in milliseconds
+    refresh-token:
+      expiration: 2592000000 # 30 days in milliseconds
+
 logging:
   level:
     org.hibernate.SQL: DEBUG
