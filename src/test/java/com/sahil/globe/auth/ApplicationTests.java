@@ -1,4 +1,4 @@
-package com.sahil.microservice.template;
+package com.sahil.globe.auth;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

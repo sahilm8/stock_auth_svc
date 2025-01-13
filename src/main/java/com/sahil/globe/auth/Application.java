@@ -1,4 +1,4 @@
-package com.sahil.microservice.template;
+package com.sahil.globe.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

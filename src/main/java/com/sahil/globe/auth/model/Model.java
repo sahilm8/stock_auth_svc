@@ -1,4 +1,4 @@
-package com.sahil.microservice.template.model;
+package com.sahil.globe.auth.model;
 
 import java.util.Date;
 

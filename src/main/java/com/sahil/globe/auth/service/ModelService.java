@@ -1,11 +1,11 @@
-package com.sahil.microservice.template.service;
+package com.sahil.globe.auth.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sahil.microservice.template.model.Model;
-import com.sahil.microservice.template.repository.ModelRepository;
+import com.sahil.globe.auth.model.Model;
+import com.sahil.globe.auth.repository.ModelRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
