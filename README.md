@@ -1,12 +1,10 @@
-# Microservice API Template
+# Auth Globe API
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-
-Microservice API template with Java 21, Maven, Spring Boot, Spring Web, Spring Webflux, Reactor Core, Spring Data JPA, MySQL Connector, Docker, Spring Dotenv, Lombok, Spring Test, H2 Database, and MacOS DNS Resolver.
+API to handle user authentication.
 
 ## Stack
 
