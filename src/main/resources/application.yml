@@ -14,13 +14,17 @@ spring:
       hibernate:
         format_sql: true
 
-  jwt:
-    secret: ${JWT_SECRET_KEY}
-    expiration: 604800000 # 7 days in milliseconds
-    refresh-token:
-      expiration: 2592000000 # 30 days in milliseconds
+jwt:
+  secret: ${JWT_SECRET_KEY}
+  expiration: 604800000 # 7 days in milliseconds
+  refresh-token:
+    expiration: 2592000000 # 30 days in milliseconds
 
 logging:
   level:
+    root: INFO
+    com.sahil.globe.auth: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
