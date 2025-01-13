@@ -22,61 +22,69 @@ API to handle user authentication.
 - Spring Test
 - H2 Database
 - MacOS DNS Resolver
+- Spring Security
+- Jackson Web Token (api, impl, jackson)
+- Spring Validation
+- Jakarta Validation
 
 ## Setup
 
 - Install dependencies:
+
 ```
 ./mvnw clean install
 ```
 
 - Pull Docker MySQL image for running database server:
+
 ```
 docker pull mysql:latest
 ```
 
 - Create an external volume for storing MySQL data:
+
 ```
 docker volume create mysql_volume
 ```
 
 - Run the container:
+
 ```
 docker compose up -d
 ```
 
 - Start the application:
+
 ```
 ./mvnw spring-boot:run
 ```
 
 - Stop the container:
+
 ```
 docker compose down
 ```
 
 ## Endpoints
 
-Instances can be created, fetched, or deleted for the default model class whose data is stored in a Docker MySQL volume (mysql_volume).
+A new user can be registered by sending a POST request to /register and an existing user can be authenticated by sending a POST request to /authenticate.
 
 ### Requests
 
 - GET /:
+
 ```
-curl -i -X GET http://localhost:8080/api/v1/model/
+curl -i -X GET http://localhost:8080/api/v1/auth/
 ```
 
-- POST /new-model: 
+- POST /register:
+
 ```
-curl -i -X POST "http://localhost:8080/api/v1/model/new-model?name=ABC"
+curl --location 'localhost:8080/api/v1/auth/register' --header 'Content-Type: application/json' --data-raw '{ "firstName": "Test", "lastName": "User", "email": "test5@example.com", "password": "password123" }'
 ```
 
-- GET /get-model:
-```
-curl -i -X GET "http://localhost:8080/api/v1/model/get-model?name=ABC"
-```
+- POST /authenticate:
 
-- DELETE /delete-model:
 ```
-curl -i -X DELETE "http://localhost:8080/api/v1/model/delete-model?name=ABC"
+curl --location 'localhost:8080/api/v1/auth/authenticate' --header 'Content-Type: application/json' --data-raw '{ "email": "test5@example.com", "password": "password123" }'
 ```
