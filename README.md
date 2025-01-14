@@ -12,8 +12,6 @@ API to handle user authentication.
 - Maven
 - Spring Boot
 - Spring Web
-- Spring Webflux
-- Reactor Core
 - Spring Data JPA
 - MySQL Connector
 - Docker
