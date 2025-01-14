@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.sahil</groupId>
 	<artifactId>globe.auth</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<name>auth_globe_svc</name>
 	<description>
 		API to handle user authentication.
