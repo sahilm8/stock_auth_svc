@@ -1,5 +1,5 @@
 services:
-  mysql:
+  stock_auth_svc:
     image: mysql:latest
     container_name: stock_auth_container
     environment:
@@ -11,7 +11,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - mysql_volume:/var/lib/mysql
+      - stock_auth_volume:/var/lib/mysql
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
