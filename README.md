@@ -4,7 +4,7 @@
 
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 
-API to handle user authentication.
+API to handle JWT user authentication.
 
 ## Stack
 
