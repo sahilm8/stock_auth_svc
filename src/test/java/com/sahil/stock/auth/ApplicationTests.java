@@ -1,4 +1,4 @@
-package com.sahil.globe.auth;
+package com.sahil.stock.auth;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
