@@ -1,7 +1,7 @@
 services:
   mysql:
     image: mysql:latest
-    container_name: mysql_container
+    container_name: stock_auth_container
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -22,6 +22,6 @@ services:
       retries: 5
 
 volumes:
-  mysql_volume:
-    name: mysql_volume
+  stock_auth_volume:
+    name: stock_auth_volume
     external: true
