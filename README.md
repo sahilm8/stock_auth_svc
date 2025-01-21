@@ -1,4 +1,4 @@
-# Auth Globe API
+# Stock Auth API
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
@@ -12,18 +12,20 @@ API to handle user authentication.
 - Maven
 - Spring Boot
 - Spring Web
+- Spring Validation
+- Jakarta Validation
 - Spring Data JPA
 - MySQL Connector
-- Docker
+- Spring Security
+- JWT API
+- JWT Implementation
+- JWT Jackson
 - Spring Dotenv
 - Lombok
 - Spring Test
 - H2 Database
 - MacOS DNS Resolver
-- Spring Security
-- Jackson Web Token (api, impl, jackson)
-- Spring Validation
-- Jakarta Validation
+- Docker
 
 ## Setup
 
@@ -42,7 +44,7 @@ docker pull mysql:latest
 - Create an external volume for storing MySQL data:
 
 ```
-docker volume create mysql_volume
+docker volume create stock_auth_volume
 ```
 
 - Run the container:
@@ -65,24 +67,35 @@ docker compose down
 
 ## Endpoints
 
-A new user can be registered by sending a POST request to /register and an existing user can be authenticated by sending a POST request to /authenticate.
+Requests can be made to perform the following actions:
 
-### Requests
+- Register User
+- Authenticate User
 
-- GET /:
+### Register User
 
-```
-curl -i -X GET http://localhost:8080/api/v1/auth/
-```
-
-- POST /register:
+#### Request
 
 ```
-curl --location 'localhost:8080/api/v1/auth/register' --header 'Content-Type: application/json' --data-raw '{ "firstName": "Test", "lastName": "User", "email": "test5@example.com", "password": "password123" }'
-```
-
-- POST /authenticate:
 
 ```
-curl --location 'localhost:8080/api/v1/auth/authenticate' --header 'Content-Type: application/json' --data-raw '{ "email": "test5@example.com", "password": "password123" }'
+
+#### Response
+
+```
+
+```
+
+### Authenticate User
+
+#### Request
+
+```
+
+```
+
+#### Response
+
+```
+
 ```
