@@ -13,7 +13,7 @@
 	<version>2.0.0</version>
 	<name>stock_auth_svc</name>
 	<description>
-		API to handle user authentication.
+		API to handle JWT user authentication.
 	</description>
 	<url/>
 	<licenses>
