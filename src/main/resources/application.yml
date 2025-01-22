@@ -21,9 +21,9 @@ server:
 
 jwt:
   secret: ${JWT_SECRET_KEY}
-  expiration: 604800000 # 7 days in milliseconds
+  expiration: 900000 # 15 minutes in milliseconds
   refresh-token:
-    expiration: 2592000000 # 30 days in milliseconds
+    expiration: 604800000 # 7 days in milliseconds
 
 logging:
   level:
