@@ -83,7 +83,7 @@ public class AuthService {
         UserPrincipal userPrincipal = UserPrincipal.from(user);
 
         if (!jwtService.isTokenValid(refreshToken, userPrincipal)) {
-            throw new ExpiredJwtException(null, null, "Refresh token has expired");
+            throw new ExpiredJwtException(null, null, null);
         }
 
         String accessToken = jwtService.generateToken(userPrincipal);
