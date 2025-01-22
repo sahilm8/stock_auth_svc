@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sahil.stock.auth.dto.authenticateUser.AuthenticateUserRequest;
 import com.sahil.stock.auth.dto.authenticateUser.AuthenticateUserResponse;
+import com.sahil.stock.auth.dto.refreshToken.RefreshTokenRequest;
+import com.sahil.stock.auth.dto.refreshToken.RefreshTokenResponse;
 import com.sahil.stock.auth.dto.registerUser.RegisterUserRequest;
 import com.sahil.stock.auth.dto.registerUser.RegisterUserResponse;
 import com.sahil.stock.auth.service.AuthService;
@@ -45,6 +47,12 @@ public class AuthController {
     public ResponseEntity<AuthenticateUserResponse> authenticateUser(
             @Valid @RequestBody AuthenticateUserRequest authenticateUserRequest) {
         return ResponseEntity.ok(authService.authenticateUser(authenticateUserRequest));
+    }
+
+    @PostMapping(value = "/refresh-token", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<RefreshTokenResponse> refreshToken(
+            @Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return ResponseEntity.ok(authService.refreshToken(refreshTokenRequest));
     }
 
     @GetMapping(value = "/*", produces = MediaType.APPLICATION_JSON_VALUE)

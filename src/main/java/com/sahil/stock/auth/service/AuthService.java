@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sahil.stock.auth.dto.authenticateUser.AuthenticateUserRequest;
 import com.sahil.stock.auth.dto.authenticateUser.AuthenticateUserResponse;
+import com.sahil.stock.auth.dto.refreshToken.RefreshTokenRequest;
+import com.sahil.stock.auth.dto.refreshToken.RefreshTokenResponse;
 import com.sahil.stock.auth.dto.registerUser.RegisterUserRequest;
 import com.sahil.stock.auth.dto.registerUser.RegisterUserResponse;
 import com.sahil.stock.auth.exception.UserAlreadyExistsException;
@@ -17,6 +19,8 @@ import com.sahil.stock.auth.model.User;
 import com.sahil.stock.auth.repository.UserRepository;
 import com.sahil.stock.auth.security.UserPrincipal;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -66,6 +70,25 @@ public class AuthService {
         return AuthenticateUserResponse.builder()
                 .accessToken(jwtService.generateToken(userPrincipal))
                 .refreshToken(jwtService.generateRefreshToken(userPrincipal))
+                .build();
+    }
+
+    public RefreshTokenResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
+        String refreshToken = refreshTokenRequest.getRefreshToken();
+        String email = jwtService.extractClaim(refreshToken, Claims::getSubject);
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("User not found: " + email));
+
+        UserPrincipal userPrincipal = UserPrincipal.from(user);
+
+        if (!jwtService.isTokenValid(refreshToken, userPrincipal)) {
+            throw new ExpiredJwtException(null, null, "Refresh token has expired");
+        }
+
+        String accessToken = jwtService.generateToken(userPrincipal);
+        return RefreshTokenResponse.builder()
+                .accessToken(accessToken)
                 .build();
     }
 }
