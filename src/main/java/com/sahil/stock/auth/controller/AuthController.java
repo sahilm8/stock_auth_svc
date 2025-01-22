@@ -34,7 +34,8 @@ public class AuthController {
                 "Stock Auth API%n%n" +
                         "Welcome to the /auth endpoint, you can make the following requests:%n" +
                         "- POST /register-user%n" +
-                        "- POST /authenticate-user%n"));
+                        "- POST /authenticate-user%n" +
+                        "- POST /refresh-token%n"));
     }
 
     @PostMapping(value = "/register-user", produces = MediaType.APPLICATION_JSON_VALUE)
