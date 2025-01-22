@@ -71,6 +71,7 @@ Requests can be made to perform the following actions:
 
 - Register User
 - Authenticate User
+- Refresh Token
 
 ### Register User
 
@@ -115,5 +116,25 @@ curl --location 'localhost:8080/api/v2/auth/authenticate-user' \
 {
     "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0dUBleGFtcGxlLmNvbSIsImlhdCI6MTczNzUwMTAzOSwiZXhwIjoxNzM4MTA1ODM5fQ.Spi1W0gRCULRwLoU3Jz8sW4_zL0XnGi0xME3PTbEFK4",
     "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0dUBleGFtcGxlLmNvbSIsImlhdCI6MTczNzUwMTAzOSwiZXhwIjoxNzQwMDkzMDM5fQ._WEcXnNyyCngS6gmJ4F3ho_Vn6Vo2DyzrmNFu-i6VjY"
+}
+```
+
+### Refresh Token
+
+#### Request
+
+```
+curl --location 'localhost:8080/api/v2/auth/refresh-token' \
+--header 'Content-Type: application/json' \
+--data '{
+    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0dUBleGFtcGxlLmNvbSIsImlhdCI6MTczNzUwNzM5OCwiZXhwIjoxNzM4MTEyMTk4fQ.JqkJxuaDbyem30MVd5Q5BQIfiLp7nu3210fmj2-rewc"
+}'
+```
+
+#### Response
+
+```
+{
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0dUBleGFtcGxlLmNvbSIsImlhdCI6MTczNzUwNzQ2NiwiZXhwIjoxNzM4MTEyMjY2fQ.Et3XavwPZThsmbrC_jcTVbJn01ly4G9jEe28HZaOs2s"
 }
 ```
