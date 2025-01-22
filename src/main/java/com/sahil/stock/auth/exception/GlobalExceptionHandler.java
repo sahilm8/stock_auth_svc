@@ -1,7 +1,6 @@
 package com.sahil.stock.auth.exception;
 
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.security.SignatureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -65,14 +64,6 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleExpiredJwtException(ExpiredJwtException ex) {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, ex.getMessage());
         problem.setTitle("Token Expired");
-        problem.setProperty("timestamp", Instant.now());
-        return problem;
-    }
-
-    @ExceptionHandler(SignatureException.class)
-    public ProblemDetail handleSignatureException(SignatureException ex) {
-        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, ex.getMessage());
-        problem.setTitle("Invalid Token");
         problem.setProperty("timestamp", Instant.now());
         return problem;
     }
