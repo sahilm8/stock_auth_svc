@@ -1,4 +1,4 @@
-package com.sahil.stock.auth.dto.getAccessToken;
+package com.sahil.stock.auth.dto.refreshToken;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetAccessTokenResponse {
+public class RefreshTokenResponse {
     private String accessToken;
 }

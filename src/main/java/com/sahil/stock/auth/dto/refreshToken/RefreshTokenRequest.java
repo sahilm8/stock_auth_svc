@@ -1,4 +1,4 @@
-package com.sahil.stock.auth.dto.getAccessToken;
+package com.sahil.stock.auth.dto.refreshToken;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetAccessTokenRequest {
+public class RefreshTokenRequest {
     @NotBlank(message = "Refresh token is required")
     private String refreshToken;
 }
