@@ -4,10 +4,16 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    url: jdbc:h2:mem:${STOCK_AUTH_TEST_DB}
-    username: ${STOCK_AUTH_TEST_USER}
-    password: ${STOCK_AUTH_TEST_PASSWORD}
-    driver-class-name: org.h2.Driver
+    auth:
+      url: jdbc:h2:mem:${STOCK_AUTH_TEST_DB}
+      username: ${STOCK_AUTH_TEST_USER}
+      password: ${STOCK_AUTH_TEST_PASSWORD}
+      driver-class-name: org.h2.Driver
+    portfolio:
+      url: jdbc:h2:mem:${STOCK_PORTFOLIO_TEST_DB}
+      username: ${STOCK_PORTFOLIO_TEST_USER}
+      password: ${STOCK_PORTFOLIO_TEST_PASSWORD}
+      driver-class-name: org.h2.Driver
   jpa:
     hibernate:
       ddl-auto: create-drop
