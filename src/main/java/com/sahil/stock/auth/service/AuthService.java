@@ -50,11 +50,14 @@ public class AuthService {
         User savedUser = userRepository.save(user);
         UserPrincipal userPrincipal = UserPrincipal.from(savedUser);
 
-        PortfolioUser portfolioUser = new PortfolioUser();
-        portfolioUser.setFirstName(registerUserRequest.getFirstName());
-        portfolioUser.setLastName(registerUserRequest.getLastName());
-        portfolioUser.setEmail(registerUserRequest.getEmail());
-        portfolioUser.setPassword(passwordEncoder.encode(registerUserRequest.getPassword()));
+        PortfolioUser portfolioUser = PortfolioUser
+                .builder()
+                .firstName(registerUserRequest.getFirstName())
+                .lastName(registerUserRequest.getLastName())
+                .email(registerUserRequest.getEmail())
+                .password(passwordEncoder.encode(registerUserRequest.getPassword()))
+                .build();
+
         portfolioUserRepository.save(portfolioUser);
 
         return RegisterUserResponse.builder()
