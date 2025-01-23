@@ -15,7 +15,9 @@ import com.sahil.stock.auth.dto.registerUser.RegisterUserRequest;
 import com.sahil.stock.auth.dto.registerUser.RegisterUserResponse;
 import com.sahil.stock.auth.exception.UserAlreadyExistsException;
 import com.sahil.stock.auth.exception.UserNotFoundException;
+import com.sahil.stock.auth.model.PortfolioUser;
 import com.sahil.stock.auth.model.User;
+import com.sahil.stock.auth.repository.PortfolioUserRepository;
 import com.sahil.stock.auth.repository.UserRepository;
 import com.sahil.stock.auth.security.UserPrincipal;
 
@@ -28,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthService {
     private final UserRepository userRepository;
+    private final PortfolioUserRepository portfolioUserRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -44,8 +47,16 @@ public class AuthService {
                 .password(passwordEncoder.encode(registerUserRequest.getPassword()))
                 .build();
 
+        PortfolioUser portfolioUser = new PortfolioUser();
+        portfolioUser.setFirstName(registerUserRequest.getFirstName());
+        portfolioUser.setLastName(registerUserRequest.getLastName());
+        portfolioUser.setEmail(registerUserRequest.getEmail());
+        portfolioUser.setPassword(passwordEncoder.encode(registerUserRequest.getPassword()));
+
         User savedUser = userRepository.save(user);
         UserPrincipal userPrincipal = UserPrincipal.from(savedUser);
+
+        portfolioUserRepository.save(portfolioUser);
 
         return RegisterUserResponse.builder()
                 .accessToken(jwtService.generateToken(userPrincipal))
