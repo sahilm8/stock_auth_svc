@@ -4,6 +4,8 @@
 
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 API to handle JWT user authentication.
 
 ## Stack
