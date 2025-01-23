@@ -6,13 +6,13 @@ import java.util.Collections;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.sahil.stock.auth.model.AuthUser;
+import com.sahil.stock.auth.model.User;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor(staticName = "from")
 public class UserPrincipal implements UserDetails {
-    private final AuthUser authUser;
+    private final User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -21,11 +21,11 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return authUser.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return authUser.getEmail();
+        return user.getEmail();
     }
 }

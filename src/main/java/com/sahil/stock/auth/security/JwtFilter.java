@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.sahil.stock.auth.exception.UserNotFoundException;
-import com.sahil.stock.auth.repository.AuthUserRepository;
+import com.sahil.stock.auth.repository.UserRepository;
 import com.sahil.stock.auth.service.JwtService;
 
 import io.jsonwebtoken.Claims;
@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
-    private final AuthUserRepository authUserRepository;
+    private final UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(
@@ -43,7 +43,7 @@ public class JwtFilter extends OncePerRequestFilter {
         final String email = jwtService.extractClaim(token, Claims::getSubject);
 
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserPrincipal userPrincipal = authUserRepository
+            UserPrincipal userPrincipal = userRepository
                     .findByEmail(email)
                     .map(UserPrincipal::from)
                     .orElseThrow(() -> new UserNotFoundException("User not found: " + email));

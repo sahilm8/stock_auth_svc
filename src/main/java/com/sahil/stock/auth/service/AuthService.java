@@ -15,8 +15,8 @@ import com.sahil.stock.auth.dto.registerUser.RegisterUserRequest;
 import com.sahil.stock.auth.dto.registerUser.RegisterUserResponse;
 import com.sahil.stock.auth.exception.UserAlreadyExistsException;
 import com.sahil.stock.auth.exception.UserNotFoundException;
-import com.sahil.stock.auth.model.AuthUser;
-import com.sahil.stock.auth.repository.AuthUserRepository;
+import com.sahil.stock.auth.model.User;
+import com.sahil.stock.auth.repository.UserRepository;
 import com.sahil.stock.auth.security.UserPrincipal;
 
 import io.jsonwebtoken.Claims;
@@ -27,24 +27,24 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 public class AuthService {
-    private final AuthUserRepository authUserRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     public RegisterUserResponse registerUser(RegisterUserRequest registerUserRequest) {
-        if (authUserRepository.existsByEmail(registerUserRequest.getEmail())) {
+        if (userRepository.existsByEmail(registerUserRequest.getEmail())) {
             throw new UserAlreadyExistsException("User already exists: " + registerUserRequest.getEmail());
         }
 
-        AuthUser authUser = AuthUser.builder()
+        User user = User.builder()
                 .firstName(registerUserRequest.getFirstName())
                 .lastName(registerUserRequest.getLastName())
                 .email(registerUserRequest.getEmail())
                 .password(passwordEncoder.encode(registerUserRequest.getPassword()))
                 .build();
 
-        AuthUser savedUser = authUserRepository.save(authUser);
+        User savedUser = userRepository.save(user);
         UserPrincipal userPrincipal = UserPrincipal.from(savedUser);
 
         return RegisterUserResponse.builder()
@@ -62,10 +62,10 @@ public class AuthService {
             throw new BadCredentialsException("Invalid email or password");
         }
 
-        AuthUser authUser = authUserRepository.findByEmail(authenticateUserRequest.getEmail())
+        User user = userRepository.findByEmail(authenticateUserRequest.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("User not found: " + authenticateUserRequest.getEmail()));
 
-        UserPrincipal userPrincipal = UserPrincipal.from(authUser);
+        UserPrincipal userPrincipal = UserPrincipal.from(user);
 
         return AuthenticateUserResponse.builder()
                 .accessToken(jwtService.generateToken(userPrincipal))
@@ -77,10 +77,10 @@ public class AuthService {
         String refreshToken = refreshTokenRequest.getRefreshToken();
         String email = jwtService.extractClaim(refreshToken, Claims::getSubject);
 
-        AuthUser authUser = authUserRepository.findByEmail(email)
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User not found: " + email));
 
-        UserPrincipal userPrincipal = UserPrincipal.from(authUser);
+        UserPrincipal userPrincipal = UserPrincipal.from(user);
 
         if (!jwtService.isTokenValid(refreshToken, userPrincipal)) {
             throw new ExpiredJwtException(null, null, null);
