@@ -4,10 +4,16 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    url: jdbc:h2:mem:${TEST_DATABASE}
-    username: ${TEST_USER}
-    password: ${TEST_PASSWORD}
-    driver-class-name: org.h2.Driver
+    auth:
+      url: jdbc:postgresql://localhost:5432/${STOCK_AUTH_TEST_DB}
+      username: ${STOCK_AUTH_TEST_USER}
+      password: ${STOCK_AUTH_TEST_PASSWORD}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    portfolio:
+      url: jdbc:postgresql://localhost:5432/${STOCK_PORTFOLIO_TEST_DB}
+      username: ${STOCK_PORTFOLIO_TEST_USER}
+      password: ${STOCK_PORTFOLIO_TEST_PASSWORD}
+      driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: create-drop
