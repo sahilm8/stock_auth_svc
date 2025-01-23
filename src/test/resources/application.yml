@@ -5,14 +5,14 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
     auth:
-      url: jdbc:h2:mem:${STOCK_AUTH_TEST_DB}
-      username: ${STOCK_AUTH_TEST_USER}
-      password: ${STOCK_AUTH_TEST_PASSWORD}
+      url: jdbc:h2:mem:stock_auth_test_db;DB_CLOSE_DELAY=-1
+      username: sa
+      password: sa
       driver-class-name: org.h2.Driver
     portfolio:
-      url: jdbc:h2:mem:${STOCK_PORTFOLIO_TEST_DB}
-      username: ${STOCK_PORTFOLIO_TEST_USER}
-      password: ${STOCK_PORTFOLIO_TEST_PASSWORD}
+      url: jdbc:h2:mem:stock_portfolio_test_db;DB_CLOSE_DELAY=-1
+      username: sa
+      password: sa
       driver-class-name: org.h2.Driver
   jpa:
     hibernate:
@@ -25,7 +25,7 @@ server:
   port: 8080
 
 jwt:
-  secret: ${JWT_TEST_SECRET_KEY}
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
   expiration: 60000 # 1 minute in milliseconds
   refresh-token:
     expiration: 120000 # 2 minutes in milliseconds
