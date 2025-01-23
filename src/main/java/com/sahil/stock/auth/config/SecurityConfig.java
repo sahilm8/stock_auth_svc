@@ -18,7 +18,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.sahil.stock.auth.exception.UserNotFoundException;
-import com.sahil.stock.auth.repository.UserRepository;
+import com.sahil.stock.auth.repository.AuthUserRepository;
 import com.sahil.stock.auth.security.JwtFilter;
 import com.sahil.stock.auth.security.UserPrincipal;
 
@@ -31,7 +31,7 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final JwtFilter jwtFilter;
-    private final UserRepository userRepository;
+    private final AuthUserRepository authUserRepository;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -66,7 +66,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(username -> userRepository
+        provider.setUserDetailsService(username -> authUserRepository
                 .findByEmail(username)
                 .map(UserPrincipal::from)
                 .orElseThrow(() -> new UserNotFoundException("User not found: " + username)));
