@@ -1,4 +1,4 @@
-package com.sahil.stock.auth.repository;
+package com.sahil.stock.auth.repository.auth;
 
 import java.util.Optional;
 import java.util.UUID;
