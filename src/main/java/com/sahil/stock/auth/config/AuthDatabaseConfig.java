@@ -9,13 +9,14 @@ import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-
-import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@RequiredArgsConstructor
-public class DatabaseConfig {
+@EnableJpaRepositories(basePackages = "com.sahil.stock.auth.repository.auth", entityManagerFactoryRef = "authEntityManagerFactory", transactionManagerRef = "authTransactionManager")
+public class AuthDatabaseConfig {
     @Primary
     @Bean(name = "authDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.auth")
@@ -24,8 +25,8 @@ public class DatabaseConfig {
     }
 
     @Primary
-    @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
+    @Bean(name = "authEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean authEntityManagerFactory(
             EntityManagerFactoryBuilder builder,
             @Qualifier("authDataSource") DataSource dataSource) {
         return builder
@@ -34,19 +35,12 @@ public class DatabaseConfig {
                 .build();
     }
 
-    @Bean(name = "portfolioDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.portfolio")
-    public DataSource portfolioDataSource() {
-        return DataSourceBuilder.create().build();
-    }
-
-    @Bean(name = "portfolioEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean portfolioEntityManagerFactory(
-            EntityManagerFactoryBuilder builder,
-            @Qualifier("portfolioDataSource") DataSource dataSource) {
-        return builder
-                .dataSource(dataSource)
-                .packages("com.sahil.stock.auth.model")
-                .build();
+    @Primary
+    @Bean(name = "authTransactionManager")
+    public PlatformTransactionManager authTransactionManager(
+            @Qualifier("authEntityManagerFactory") LocalContainerEntityManagerFactoryBean authEntityManagerFactory) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(authEntityManagerFactory.getObject());
+        return transactionManager;
     }
 }
