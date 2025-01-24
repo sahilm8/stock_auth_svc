@@ -5,12 +5,12 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
     auth:
-      url: jdbc:postgresql://localhost:5432/${STOCK_AUTH_DB}
+      jdbc-url: jdbc:mysql://localhost:3306/${STOCK_AUTH_DB}
       username: ${STOCK_AUTH_USER}
       password: ${STOCK_AUTH_PASSWORD}
       driver-class-name: com.mysql.cj.jdbc.Driver
     portfolio:
-      url: jdbc:postgresql://localhost:5432/${STOCK_PORTFOLIO_DB}
+      jdbc-url: jdbc:mysql://localhost:3306/${STOCK_PORTFOLIO_DB}
       username: ${STOCK_PORTFOLIO_USER}
       password: ${STOCK_PORTFOLIO_PASSWORD}
       driver-class-name: com.mysql.cj.jdbc.Driver
