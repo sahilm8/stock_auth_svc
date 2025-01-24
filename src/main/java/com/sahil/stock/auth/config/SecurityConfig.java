@@ -18,7 +18,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.sahil.stock.auth.exception.UserNotFoundException;
-import com.sahil.stock.auth.repository.UserRepository;
+import com.sahil.stock.auth.repository.auth.UserRepository;
 import com.sahil.stock.auth.security.JwtFilter;
 import com.sahil.stock.auth.security.UserPrincipal;
 

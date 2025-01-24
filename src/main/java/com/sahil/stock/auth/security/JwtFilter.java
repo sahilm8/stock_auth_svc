@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.sahil.stock.auth.exception.UserNotFoundException;
-import com.sahil.stock.auth.repository.UserRepository;
+import com.sahil.stock.auth.repository.auth.UserRepository;
 import com.sahil.stock.auth.service.JwtService;
 
 import io.jsonwebtoken.Claims;
