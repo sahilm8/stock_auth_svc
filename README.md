@@ -19,9 +19,8 @@ API to handle JWT user authentication.
 - Spring Data JPA
 - MySQL Connector
 - Spring Security
-- JWT API
-- JWT Implementation
-- JWT Jackson
+- Spring OAuth2 Authorization
+- Spring OAuth2 Resource
 - Spring Dotenv
 - Lombok
 - Spring Test
